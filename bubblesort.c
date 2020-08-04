@@ -2,9 +2,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-
-
-
 int main() {
 
 int unsorted[6], counter, temp;
@@ -34,8 +31,7 @@ for (counter=1; counter <= 6; counter = counter+1){
   To change direction, change:
         If unsorted[counter] > unsorted[counter+1]
   to
-        If unsorted[counter] < unsorted[counter+1]
-  
+        If unsorted[counter] < unsorted[counter+1]  
 */ 
 
 while (swapFlag == true){
