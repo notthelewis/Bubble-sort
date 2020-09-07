@@ -1,53 +1,53 @@
+// C program for bubble sort
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
+#include <time.h>
 
-int main() {
 
-int unsorted[6], counter, temp;
-bool swapFlag = true;
-
-/* 
-  This  randomly generates 6 integers 
-  Storing each in in an array called: unsorted
-*/ 
-
-for (counter=1; counter <= 6; counter = counter+1){
-  srand(counter * counter);
-  unsorted[counter] = rand() % 100 + 1;
-  printf("%d\n", unsorted[counter]);
+/* Uses a temp variable to swap array elements by reference */
+void swap(int *xp, int *yp) {
+	int temp = *xp;
+	*xp = *yp;
+	*yp = temp;
 }
 
-/* 
-  Checks each element in unsorted[] against the next
-  If unsorted[counter] > unsorted[counter+1]
-  Move that number into temp.
-  Move the next number to this position
-  Move temp into next position, set swapFlag as true.
-   
-  The loop breaks when no more numbers are left to swap. 
-  End result = Sorted array smallest to largest. 
-  
-  To change direction, change:
-        If unsorted[counter] > unsorted[counter+1]
-  to
-        If unsorted[counter] < unsorted[counter+1]  
-*/ 
+/* Sorts array elements using the bubble sort algorithm */
+void bubbleSort(int arr[], int n) {
+	int i, j;
+	for (i = 0; i < n-1; i++)
+		for(j = 0; j < n-i-1; j++)
+			if(arr[j] > arr[j+1])
+				swap(&arr[j], &arr[j+1]);
+}
 
-while (swapFlag == true){
-swapFlag = false;
-for (counter=1; counter <= 6; counter = counter+1){
-  if (unsorted[counter] > unsorted[counter + 1]){
-    temp = unsorted[counter+1];
-    unsorted[counter+1] = unsorted[counter];
-    unsorted[counter] = temp;
-    swapFlag=true;
-    }
-  }
+/* Used to print the contents of the array */
+void printArray(int arr[], int size)
+{
+	int i; 
+	for (i = 0; i < size; i++)
+		printf("%d\n", arr[i]);
+	printf("\n");
 }
-printf("\n");
-for (counter=1; counter <= 6; counter = counter+1){
-        printf("%d\n", unsorted[counter]);
-}
-return 0;
+
+/* Generates 12 random numbers and passes them through to bubbleSort and printArray */
+int main()
+{
+	int arr[12], i;
+	int n = sizeof(arr)/sizeof(arr[0]);
+
+	/* Fills arr[] with random integers */
+	srand(time(NULL));
+	for (i = 0; i < 11; i++) {
+		arr[i] = rand() % 20 ;
+	}
+
+
+	printf("Unsorted array: \n");
+	printArray(arr, n);
+
+	printf("Sorted array: \n");
+	bubbleSort(arr, n);
+
+	printArray(arr, n);
+	return 0;
 }
